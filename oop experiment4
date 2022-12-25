@@ -1,0 +1,108 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+class student 
+{
+  int r;
+  char name[30];
+  float per ;
+  public:
+    void getdata()
+      {
+       cout<<"\n enter  name of student :";
+       cin>>name;
+       cout<<"\n enter roll no of student :";
+       cin>>r;
+       cout<<"\n enter persentage of student :";
+       cin>>per;
+      }
+     void putdata()
+     {
+        cout<<"\n   name of student :"<<name;
+        cout<<"\n roll no  of student :"<<r;
+        cout<<"\n persentage of student :"<<per;
+     }
+};
+int main()
+{
+  int n,a,i;
+  student s[20];
+  cout<<"\n enter how many student data ";
+  cin>>n;
+ 
+  char z;
+  do{
+   cout<<"\n 1.write \n2.read \n3.append";
+   cin>>a;
+  switch(a)
+   
+   {
+       case 1:
+             {
+              fstream out ;
+              out.open("student.odt",ios::out);
+              if(out.is_open())
+              {
+                cout<<"\n file is open";
+                
+              }
+              else
+               {
+                  cout<<"\n file not open";
+               }
+               for(i=0;i<n;i++)
+               {
+                 s[i].getdata();
+                 out.write((char*) &s[i],sizeof(s[i]));
+               }
+               out.close();
+              }
+              break;
+              
+       case 2:
+             {
+               fstream inn;
+               inn.open("student.odt",ios::in);
+               while( inn.read((char*) &s[i],sizeof(s[i])))
+               {
+                
+                 s[i].putdata();
+                              
+               }
+               inn.close();
+             }  
+             break;   
+       case 3:
+            {
+              fstream out ;
+              out.open("student.odt",ios::app);
+              if(out.is_open())
+              {
+                cout<<"\n file is open";
+                
+              }
+              else
+               {
+                  cout<<"\n file not open";
+               }
+               
+               for(i=0;i<n;i++)
+               {
+                 s[i].getdata();
+                 out.write((char*) &s[i],sizeof(s[i]));
+               }
+               out.close();
+            }
+              break;
+       default :
+                cout<<"\n case not valide ";
+                break;
+                           
+             
+               
+   }
+   cout<<"\n do you want to repeat : ";
+   cin>>z;
+   }while(z=='y');
+   return 0;
+}

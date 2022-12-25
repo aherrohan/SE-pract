@@ -1,0 +1,60 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+class student 
+{
+  int r;
+  char name[30];
+  float per ;
+  public:
+    void getdata()
+      {
+       cout<<"\n enter  name of student :";
+       cin>>name;
+       cout<<"\n enter roll no of student :";
+       cin>>r;
+       cout<<"\n enter persentage of student :";
+       cin>>per;
+      }
+     void putdata()
+     {
+        cout<<"\n   name of student :"<<name;
+        cout<<"\n roll no  of student :"<<r;
+        cout<<"\n persentage of student :"<<per;
+     }
+};
+int main()
+{
+ 	 		  int n,a,i;
+			  student s[20];
+			  cout<<"\n enter how many student data ";
+              cin>>n;
+              fstream out ;
+              out.open("student.odt",ios::out);
+              if(out.is_open())
+              {
+                cout<<"\n file is open";
+                
+              }
+              else
+               {
+                  cout<<"\n file not open";
+               }
+               for(i=0;i<n;i++)
+               {
+                 s[i].getdata();
+                 out.write((char*) &s[i],sizeof(s[i]));
+               }
+               out.close();
+               fstream inn;
+               inn.open("student.odt",ios::in);
+               for(i=0;i<n;i++)
+               {
+                 inn.read((char*) &s[i],sizeof(s[i]));
+                 s[i].putdata();
+                 
+               }
+               inn.close();
+               return 0;
+}              
+             
